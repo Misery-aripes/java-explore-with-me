@@ -35,7 +35,7 @@ services:
   main-server:
     build: service
     image: service
-    container_name: ewmService
+    container_name: service
     ports:
       - "8080:8080"
     depends_on:
