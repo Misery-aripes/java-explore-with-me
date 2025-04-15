@@ -5,4 +5,3 @@ public class AccessException extends RuntimeException {
         super(message);
     }
 }
-

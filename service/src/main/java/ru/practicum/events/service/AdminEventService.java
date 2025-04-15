@@ -12,4 +12,3 @@ public interface AdminEventService {
 
     EventDto updateEvent(Long eventId, EventUpdateAdmin eventUpdateAdmin);
 }
-

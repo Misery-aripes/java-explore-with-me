@@ -6,4 +6,3 @@ public enum Status {
     REJECTED,
     CANCELED
 }
-

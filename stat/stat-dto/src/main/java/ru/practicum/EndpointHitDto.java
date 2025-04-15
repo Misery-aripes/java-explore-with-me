@@ -23,4 +23,3 @@ public class EndpointHitDto {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime timestamp;
 }
-
