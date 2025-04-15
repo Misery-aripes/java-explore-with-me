@@ -1,8 +1,8 @@
 version: "3.1"
 services:
-  stat-server:
+  stats-server:
     build: stat/stat-server
-    image: java-explore-with-me-stat-server
+    image: java-explore-with-me-stats-server
     container_name: statsApp
     ports:
       - "9090:9090"
