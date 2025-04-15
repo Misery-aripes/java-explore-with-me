@@ -1,8 +1,8 @@
 version: "3.1"
 services:
-  stats-server:
-    build: ewm-stats/stats-server
-    image: java-explore-with-me-stats-server
+  stat-server:
+    build: stat/stat-server
+    image: java-explore-with-me-stat-server
     container_name: statsApp
     ports:
       - "9090:9090"
@@ -13,7 +13,6 @@ services:
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=12345
     restart: on-failure
-
 
   stats-db:
     image: postgres:16.1
@@ -40,7 +39,7 @@ services:
       - "8080:8080"
     depends_on:
       - main-db
-      - stats-server
+      - stat-server
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://main-db:5432/mainDb
       - SPRING_DATASOURCE_USERNAME=postgres
