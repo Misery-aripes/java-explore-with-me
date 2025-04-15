@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.practicum.EndpointHitDto;
 import ru.practicum.ViewStatsDto;
+import ru.practicum.exception.InvalidDateRangeException;
 import ru.practicum.mapper.EndpointHitMapper;
 import ru.practicum.model.EndpointHit;
 import ru.practicum.repository.HitRepository;
@@ -29,6 +30,9 @@ public class StatsServiceImpl implements StatsService {
     public List<ViewStatsDto> findHitsByParams(LocalDateTime start, LocalDateTime end, List<String> uris,
                                                Boolean unique
     ) {
+        if (start.isAfter(end)) {
+            throw new InvalidDateRangeException("Ошибка даты.");
+        }
         if (Boolean.TRUE.equals(unique)) {
             return hitRepository.findAllUnique(start, end, uris);
         } else {
@@ -36,3 +40,4 @@ public class StatsServiceImpl implements StatsService {
         }
     }
 }
+
