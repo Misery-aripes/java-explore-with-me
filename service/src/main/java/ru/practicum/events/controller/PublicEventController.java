@@ -23,6 +23,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Slf4j
 public class PublicEventController {
+    private static final String DATE_PATTERN = "yyyy-MM-dd HH:mm:ss";
     private final PublicEventService publicEventService;
 
     @GetMapping("/{eventId}")
@@ -38,12 +39,12 @@ public class PublicEventController {
             @RequestParam(defaultValue = "") String text,
             @RequestParam(defaultValue = "") List<Long> categories,
             @RequestParam(required = false) Boolean paid,
-            @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime rangeStart,
-            @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime rangeEnd,
-            @RequestParam(value = "onlyAvailable", defaultValue = "false", required = false) Boolean onlyAvailable,
+            @DateTimeFormat(pattern = DATE_PATTERN) LocalDateTime rangeStart,
+            @DateTimeFormat(pattern = DATE_PATTERN) LocalDateTime rangeEnd,
+            @RequestParam(value = "onlyAvailable", defaultValue = "false") Boolean onlyAvailable,
             @RequestParam(required = false) EventSort sort,
-            @RequestParam(value = "from", defaultValue = "0", required = false) Integer from,
-            @RequestParam(value = "size", defaultValue = "10", required = false) Integer size,
+            @RequestParam(value = "from", defaultValue = "0") Integer from,
+            @RequestParam(value = "size", defaultValue = "10") Integer size,
             HttpServletRequest request) {
         log.info("Получение событий");
         if (rangeStart != null && rangeEnd != null && rangeStart.isAfter(rangeEnd)) {

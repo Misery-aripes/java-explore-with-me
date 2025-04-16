@@ -25,6 +25,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Slf4j
 public class AdminEventController {
+    private static final String DATE_PATTERN = "yyyy-MM-dd HH:mm:ss";
     private final AdminEventService adminEventService;
 
     @GetMapping
@@ -32,11 +33,11 @@ public class AdminEventController {
                                                             @RequestParam(defaultValue = "") List<String> states,
                                                             @RequestParam(defaultValue = "") List<Long> categories,
                                                             @RequestParam(required = false)
-                                                            @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime rangeStart,
+                                                            @DateTimeFormat(pattern = DATE_PATTERN) LocalDateTime rangeStart,
                                                             @RequestParam(required = false)
-                                                            @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime rangeEnd,
-                                                            @RequestParam(value = "from", defaultValue = "0", required = false) Integer from,
-                                                            @RequestParam(value = "size", defaultValue = "10", required = false) Integer size) {
+                                                            @DateTimeFormat(pattern = DATE_PATTERN) LocalDateTime rangeEnd,
+                                                            @RequestParam(value = "from", defaultValue = "0") Integer from,
+                                                            @RequestParam(value = "size", defaultValue = "10") Integer size) {
         log.info("Admin: Поиск событий");
         int page = from / size;
         PageRequest pageRequest = PageRequest.of(page, size, Sort.unsorted());

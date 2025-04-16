@@ -3,6 +3,7 @@ package ru.practicum.events.service;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.StatsClient;
 import ru.practicum.category.model.Category;
 import ru.practicum.category.repository.CategoryRepository;
@@ -29,6 +30,7 @@ import java.util.stream.Collectors;
 import static ru.practicum.events.model.State.*;
 
 @Service
+@Transactional(readOnly = true)
 public class AdminEventServiceImpl extends EventBase implements AdminEventService {
     private final EventRepository eventRepository;
     private final CategoryRepository categoryRepository;
@@ -86,6 +88,7 @@ public class AdminEventServiceImpl extends EventBase implements AdminEventServic
     }
 
     @Override
+    @Transactional
     public EventDto updateEvent(Long eventId, EventUpdateAdmin eventUpdateAdmin) {
         Event event = eventRepository.findById(eventId)
                 .orElseThrow(() -> new NotFoundException("Событие с id: " + eventId + " не найдено."));

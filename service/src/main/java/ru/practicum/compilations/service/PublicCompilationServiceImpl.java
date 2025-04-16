@@ -2,6 +2,7 @@ package ru.practicum.compilations.service;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.StatsClient;
 import ru.practicum.compilations.dto.CompilationDto;
 import ru.practicum.compilations.mapper.CompilationMapper;
@@ -18,6 +19,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional(readOnly = true)
 public class PublicCompilationServiceImpl extends CompilationBase implements PublicCompilationService {
     private final CompilationRepository compilationRepository;
 

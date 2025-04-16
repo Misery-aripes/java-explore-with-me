@@ -6,7 +6,8 @@ import ru.practicum.events.model.Event;
 
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity

@@ -2,6 +2,7 @@ package ru.practicum.requests.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.events.model.Event;
 import ru.practicum.events.model.State;
 import ru.practicum.events.repository.EventRepository;
@@ -27,6 +28,7 @@ import static ru.practicum.requests.model.Status.CONFIRMED;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class RequestServiceImpl implements RequestService {
 
     private final UserRepository userRepository;
@@ -34,6 +36,7 @@ public class RequestServiceImpl implements RequestService {
     private final RequestRepository requestRepository;
 
     @Override
+    @Transactional
     public ParticipationRequestDto addRequest(Long userId, Long eventId) {
         if (!requestRepository.findAllByRequesterIdAndEventId(userId, eventId).isEmpty()) {
             throw new ViolationException("Нельзя добавить повторный запрос");
@@ -93,6 +96,7 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
+    @Transactional
     public ParticipationRequestDto cancelRequest(Long userId, Long requestId) {
         userRepository.findById(userId).orElseThrow(()
                 -> new NotFoundException("Пользователь с id: " + userId + " не найден"));
@@ -113,7 +117,7 @@ public class RequestServiceImpl implements RequestService {
 
         List<Request> requests = requestRepository.findAllByEvent(event).stream()
                 .filter(request -> request.getEvent().getInitiator().getId().equals(userId))
-                .collect(Collectors.toList());
+                .toList();
 
         if (requests.isEmpty()) {
             return new ArrayList<>();
@@ -124,6 +128,7 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
+    @Transactional
     public EventRequestStatusUpdateResult updateRequestStatus(Long userId, Long eventId,
                                                               EventRequestStatusUpdateRequest eventRequestStatusUpdateRequest) {
         userRepository.findById(userId)

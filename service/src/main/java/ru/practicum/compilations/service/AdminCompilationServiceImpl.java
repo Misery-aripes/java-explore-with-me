@@ -1,6 +1,7 @@
 package ru.practicum.compilations.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.StatsClient;
 import ru.practicum.compilations.dto.CompilationDto;
 import ru.practicum.compilations.dto.CompilationUpdateDto;
@@ -20,6 +21,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional(readOnly = true)
 public class AdminCompilationServiceImpl extends CompilationBase implements AdminCompilationService {
     private final EventRepository eventRepository;
     private final CompilationRepository compilationRepository;
@@ -34,6 +36,7 @@ public class AdminCompilationServiceImpl extends CompilationBase implements Admi
     }
 
     @Override
+    @Transactional
     public CompilationDto addCompilation(NewCompilationDto newCompilationDto) {
         List<Event> events = List.of();
         if (newCompilationDto.getEvents() != null) {
@@ -45,6 +48,7 @@ public class AdminCompilationServiceImpl extends CompilationBase implements Admi
     }
 
     @Override
+    @Transactional
     public void deleteCompilation(Long compilationId) {
         compilationRepository.findById(compilationId).orElseThrow(()
                 -> new NotFoundException("Компиляция с id: " + compilationId + " Не найдена."));
@@ -52,6 +56,7 @@ public class AdminCompilationServiceImpl extends CompilationBase implements Admi
     }
 
     @Override
+    @Transactional
     public CompilationDto updateCompilation(Long compId, CompilationUpdateDto compilationUpdateDto) {
         Compilation compilation = compilationRepository.findById(compId).orElseThrow(()
                 -> new NotFoundException("Компиляции не найдены"));

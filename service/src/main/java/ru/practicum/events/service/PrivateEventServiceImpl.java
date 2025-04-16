@@ -32,6 +32,7 @@ import static ru.practicum.events.model.State.*;
 
 @Slf4j
 @Service
+@Transactional(readOnly = true)
 public class PrivateEventServiceImpl extends EventBase implements PrivateEventService {
     private final EventRepository eventRepository;
     private final CategoryRepository categoryRepository;
@@ -52,6 +53,7 @@ public class PrivateEventServiceImpl extends EventBase implements PrivateEventSe
     }
 
     @Override
+    @Transactional
     public EventDto addEvent(Long userId, NewEventDto eventDto) {
         Long categoryId = eventDto.getCategory();
         Category category = categoryRepository.findById(categoryId)
@@ -67,6 +69,7 @@ public class PrivateEventServiceImpl extends EventBase implements PrivateEventSe
     }
 
     @Override
+    @Transactional
     public EventDto updateEvent(Long userId, Long eventId, EventUpdateUser eventUpdateUser) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException("Пользователь с id: " + userId + " не найден"));
@@ -120,7 +123,6 @@ public class PrivateEventServiceImpl extends EventBase implements PrivateEventSe
     }
 
     @Override
-    @Transactional(readOnly = true)
     public EventDto getEventByUserAndEvent(Long userId, Long eventId) {
         userRepository.findById(userId).orElseThrow(()
                 -> new NotFoundException("Пользователь с id: " + userId + " не найден"));

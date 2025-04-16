@@ -2,6 +2,7 @@ package ru.practicum.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.EndpointHitDto;
 import ru.practicum.ViewStatsDto;
 import ru.practicum.exception.InvalidDateRangeException;
@@ -14,11 +15,13 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class StatsServiceImpl implements StatsService {
 
     private final HitRepository hitRepository;
 
     @Override
+    @Transactional
     public EndpointHitDto saveHit(EndpointHitDto endpointHitDto) {
         EndpointHit endpointHit = EndpointHitMapper.mapToEndpointHit(endpointHitDto);
         hitRepository.save(endpointHit);

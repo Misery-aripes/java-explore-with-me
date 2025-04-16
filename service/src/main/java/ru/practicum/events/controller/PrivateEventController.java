@@ -63,8 +63,8 @@ public class PrivateEventController {
     @GetMapping
     public ResponseEntity<List<EventShortDto>> getEventsByUser(
             @PathVariable @Positive Long userId,
-            @RequestParam(value = "from", defaultValue = "0", required = false) @PositiveOrZero int from,
-            @RequestParam(value = "size", defaultValue = "10", required = false) @Positive int size) {
+            @RequestParam(value = "from", defaultValue = "0") @PositiveOrZero int from,
+            @RequestParam(value = "size", defaultValue = "10") @Positive int size) {
         log.info("Получение событий, добавленных пользователем с идентификатором {}", userId);
         int page = from / size;
         PageRequest pageRequest = PageRequest.of(page, size);
