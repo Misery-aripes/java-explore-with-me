@@ -12,6 +12,7 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://stats-db:5432/statsDb
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=12345
+      - TZ=UTC
     restart: on-failure
 
   stats-db:
@@ -25,6 +26,7 @@ services:
       - POSTGRES_DB=statsDb
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=12345
+      - TZ=UTC
     healthcheck:
       test: pg_isready -q -d $$POSTGRES_DB -U $$POSTGRES_USER
       timeout: 5s
@@ -45,6 +47,7 @@ services:
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=12345
       - STATS_SERVER_URL=http://stats-server:9090
+      - TZ=UTC
     restart: on-failure
 
   ewm-db:
@@ -58,6 +61,7 @@ services:
       - POSTGRES_DB=mainDb
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=12345
+      - TZ=UTC
     healthcheck:
       test: pg_isready -q -d $$POSTGRES_DB -U $$POSTGRES_USER
       timeout: 5s
