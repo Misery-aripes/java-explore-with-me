@@ -5,6 +5,7 @@ import lombok.*;
 import ru.practicum.category.model.Category;
 import ru.practicum.location.model.Location;
 import ru.practicum.user.model.User;
+import ru.practicum.base.enums.State;
 
 import java.time.LocalDateTime;
 

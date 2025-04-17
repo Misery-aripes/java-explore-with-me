@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static ru.practicum.events.model.State.PUBLISHED;
+import static ru.practicum.base.enums.State.PUBLISHED;
 
 @Service
 @Transactional(readOnly = true)

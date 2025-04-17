@@ -1,9 +1,10 @@
-package ru.practicum.events.model;
+package ru.practicum.base.enums;
 
 public enum State {
     PENDING,
     PUBLISHED,
     CANCELED;
+
     public static State getStateFromString(String stringState) {
         for (State state : State.values()) {
             if (state.name().equalsIgnoreCase(stringState)) {

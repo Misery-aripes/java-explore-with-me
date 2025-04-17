@@ -4,6 +4,7 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import ru.practicum.base.enums.State;
 
 @Data
 @AllArgsConstructor

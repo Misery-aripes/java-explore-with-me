@@ -5,9 +5,11 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Data
-@NoArgsConstructor
+@Getter
+@Setter
+@EqualsAndHashCode
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "hits")
 public class EndpointHit {

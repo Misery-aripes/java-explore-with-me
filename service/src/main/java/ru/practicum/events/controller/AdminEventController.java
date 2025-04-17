@@ -10,9 +10,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.practicum.base.enums.State;
 import ru.practicum.events.dto.EventUpdateAdmin;
 import ru.practicum.events.model.AdminEventParams;
-import ru.practicum.events.model.State;
 import ru.practicum.events.service.AdminEventService;
 import ru.practicum.events.dto.EventDto;
 
