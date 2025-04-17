@@ -355,50 +355,6 @@
       "response": []
     },
     {
-      "name": "Подтверждение статуса 2 ивента",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"Status 200\", function () {\r",
-              "  pm.response.to.have.status(200);\r",
-              "});"
-            ],
-            "type": "text/javascript",
-            "packages": {}
-          }
-        }
-      ],
-      "request": {
-        "method": "PATCH",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"stateAction\": \"PUBLISH_EVENT\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "http://localhost:8080/admin/events/2",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "8080",
-          "path": [
-            "admin",
-            "events",
-            "2"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
       "name": "Создание 1 комментария",
       "event": [
         {
